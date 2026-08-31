@@ -11,6 +11,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(search_engine
     src/main.cpp
+    src/Tokenizer.cpp
+)
+
+target_include_directories(search_engine
+    PRIVATE
+        ${PROJECT_SOURCE_DIR}/include
 )
 
 include(CTest)
@@ -28,6 +34,13 @@ if(BUILD_TESTING)
 
     add_executable(search_engine_tests
         tests/SanityTest.cpp
+        tests/TokenizerTest.cpp
+        src/Tokenizer.cpp
+    )
+
+    target_include_directories(search_engine_tests
+        PRIVATE
+            ${PROJECT_SOURCE_DIR}/include
     )
 
     target_link_libraries(search_engine_tests
