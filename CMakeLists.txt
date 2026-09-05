@@ -12,6 +12,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(search_engine
     src/main.cpp
     src/Tokenizer.cpp
+    src/InvertedIndex.cpp
 )
 
 target_include_directories(search_engine
@@ -35,7 +36,9 @@ if(BUILD_TESTING)
     add_executable(search_engine_tests
         tests/SanityTest.cpp
         tests/TokenizerTest.cpp
+        tests/InvertedIndexTest.cpp
         src/Tokenizer.cpp
+        src/InvertedIndex.cpp
     )
 
     target_include_directories(search_engine_tests
