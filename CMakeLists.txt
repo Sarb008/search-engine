@@ -13,6 +13,7 @@ add_executable(search_engine
     src/main.cpp
     src/Tokenizer.cpp
     src/InvertedIndex.cpp
+    src/PostingListOps.cpp
 )
 
 target_include_directories(search_engine
@@ -37,8 +38,10 @@ if(BUILD_TESTING)
         tests/SanityTest.cpp
         tests/TokenizerTest.cpp
         tests/InvertedIndexTest.cpp
+        tests/PostingListOpsTest.cpp
         src/Tokenizer.cpp
         src/InvertedIndex.cpp
+        src/PostingListOps.cpp
     )
 
     target_include_directories(search_engine_tests
