@@ -35,13 +35,15 @@ if(BUILD_TESTING)
     FetchContent_MakeAvailable(googletest)
 
     add_executable(search_engine_tests
-        tests/SanityTest.cpp
-        tests/TokenizerTest.cpp
-        tests/InvertedIndexTest.cpp
-        tests/PostingListOpsTest.cpp
-        src/Tokenizer.cpp
-        src/InvertedIndex.cpp
-        src/PostingListOps.cpp
+    	tests/SanityTest.cpp
+    	tests/TokenizerTest.cpp
+    	tests/InvertedIndexTest.cpp
+    	tests/PostingListOpsTest.cpp
+    	tests/QueryEngineTest.cpp
+    	src/Tokenizer.cpp
+    	src/InvertedIndex.cpp
+    	src/PostingListOps.cpp
+    	src/QueryEngine.cpp
     )
 
     target_include_directories(search_engine_tests
