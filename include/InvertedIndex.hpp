@@ -4,6 +4,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 
 class InvertedIndex {
 public:
@@ -14,4 +15,5 @@ public:
 
 private:
     std::unordered_map<std::string, PostingList> dictionary_;
+    std::unordered_set<DocID> indexed_documents_;
 };

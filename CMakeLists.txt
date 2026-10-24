@@ -14,6 +14,7 @@ add_executable(search_engine
     src/Tokenizer.cpp
     src/InvertedIndex.cpp
     src/PostingListOps.cpp
+    src/QueryEngine.cpp
 )
 
 target_include_directories(search_engine

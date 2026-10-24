@@ -110,3 +110,49 @@ TEST(QueryEngineTest, ReturnsEmptyForPunctuationOnlyQuery) {
 
     EXPECT_TRUE(result.empty());
 }
+
+TEST(QueryEngineTest, HandlesDocumentsAddedOutOfDocIdOrder) {
+    InvertedIndex index;
+
+    index.add_document(3, "cat dog");
+    index.add_document(1, "cat dog");
+    index.add_document(2, "cat bird");
+
+    QueryEngine engine(index);
+
+    const std::vector<DocID> result = engine.search("cat dog");
+
+    ASSERT_EQ(result.size(), 2);
+    EXPECT_EQ(result[0], 1);
+    EXPECT_EQ(result[1], 3);
+}
+
+TEST(QueryEngineTest, HandlesRepeatedQueryTerms) {
+    InvertedIndex index;
+
+    index.add_document(1, "cat dog");
+    index.add_document(2, "cat bird");
+    index.add_document(3, "cat dog bird");
+
+    QueryEngine engine(index);
+
+    const std::vector<DocID> result = engine.search("cat cat dog");
+
+    ASSERT_EQ(result.size(), 2);
+    EXPECT_EQ(result[0], 1);
+    EXPECT_EQ(result[1], 3);
+}
+
+TEST(QueryEngineTest, DoesNotReturnDuplicateDocumentIds) {
+    InvertedIndex index;
+
+    index.add_document(1, "cat dog");
+    index.add_document(1, "cat dog");
+
+    QueryEngine engine(index);
+
+    const std::vector<DocID> result = engine.search("cat");
+
+    ASSERT_EQ(result.size(), 1);
+    EXPECT_EQ(result[0], 1);
+}
